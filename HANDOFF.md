@@ -35,8 +35,8 @@ _Entry points, important modules, config, secrets location (not values)._
 
 - **Project:** `Crypto calculator`
 - **Branch:** `main`
-- **Last updated:** 2026-10-08 16:45:09 -03
-- **Built on commit:** 7ad4b10 — feat: rewrite Crypto Calculator in Rust (Tauri 2) for macOS, Windows and Linux (Jonathan Carbiere, 2026-10-08)
+- **Last updated:** 2026-10-08 16:51:25 -03
+- **Built on commit:** c60f359 — fix: apply adversarial review must-fixes (Codex-judged) (Jonathan Carbiere, 2026-10-08)
 - **README says:** Live crypto ⇄ fiat converter that lives in your menu bar (macOS) or system tray (Windows, Linux).
 
 ## How to build / run / test
@@ -79,19 +79,11 @@ _Entry points, important modules, config, secrets location (not values)._
 
 ## Changes in this commit
 
-- M	.github/workflows/build.yml
-- M	HANDOFF.md
-- M	src-tauri/src/lib.rs
-- M	src-tauri/src/market.rs
-- M	src-tauri/tauri.conf.json
-- M	src/index.html
-- M	src/main.js
-- M	src/num.js
-- M	src/styles.css
-- M	tests/num.test.mjs
+- M	.gitignore
 
 ## Recent history
 
+- c60f359 fix: apply adversarial review must-fixes (Codex-judged) _(Jonathan Carbiere, 2026-10-08)_
 - 7ad4b10 feat: rewrite Crypto Calculator in Rust (Tauri 2) for macOS, Windows and Linux _(Jonathan Carbiere, 2026-10-08)_
 
 <!-- HANDOFF:AUTO:END -->
