@@ -38,7 +38,7 @@
       <span class="spark-label">7D</span>
     </header>
 
-    <section class="converter" aria-label="Converter">
+    <section class="converter" id="converter" aria-label="Converter">
       <div class="field field-crypto">
         <label class="field-label" for="cryptoAmt" id="cryptoLabel">BTC</label>
         <input id="cryptoAmt" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="0">
@@ -46,7 +46,9 @@
           <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8" height="8" rx="2"/><path d="M3 10V4a1 1 0 0 1 1-1h6"/></svg>
         </button>
       </div>
-      <span class="equals" aria-hidden="true">=</span>
+      <button class="equals" id="swapBtn" type="button" aria-label="Swap currencies" title="Swap (⌘S)">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 2v12M2 5l3-3 3 3M11 14V2M8 11l3 3 3-3"/></svg>
+      </button>
       <div class="field field-fiat">
         <select id="fiat" class="field-label" aria-label="Fiat currency"></select>
         <input id="fiatAmt" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="0"

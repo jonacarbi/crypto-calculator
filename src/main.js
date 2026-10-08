@@ -19,11 +19,13 @@ const state = {
   snap: null,
   coinId: store.get('coin', 'bitcoin'),
   vs: FIATS.includes(store.get('vs', 'usd')) ? store.get('vs', 'usd') : 'usd',
-  edited: 'crypto',
+  edited: store.get('swapped', '0') === '1' ? 'fiat' : 'crypto',
   error: null,
   active: 0,
+  swapped: store.get('swapped', '0') === '1',
 };
 
+const topInput = () => $(state.swapped ? 'fiatAmt' : 'cryptoAmt');
 const coin = () => state.snap?.coins.find((c) => c.id === state.coinId) ?? state.snap?.coins[0] ?? null;
 const money = (value, digits) =>
   new Intl.NumberFormat(undefined, {
@@ -163,7 +165,7 @@ async function setCurrency(vs) {
 
 function closePicker() {
   $('picker').close();
-  $('cryptoAmt').focus();
+  topInput().focus();
 }
 
 function selectCoin(id) {
@@ -271,6 +273,19 @@ function onSearchKey(e) {
 }
 
 /* ---------- wiring ---------- */
+// Moves the typed amount to the other currency and puts that one on top:
+// 10 USD → … BTC becomes 10 BTC → … USD.
+function swap() {
+  const [src, dst] = state.edited === 'crypto' ? ['cryptoAmt', 'fiatAmt'] : ['fiatAmt', 'cryptoAmt'];
+  $(dst).value = $(src).value;
+  state.edited = state.edited === 'crypto' ? 'fiat' : 'crypto';
+  state.swapped = state.edited === 'fiat';
+  store.set('swapped', state.swapped ? '1' : '0');
+  $('converter').classList.toggle('swapped', state.swapped);
+  recompute();
+  topInput().focus();
+}
+
 function renderQuick() {
   $('quick').replaceChildren(...QUICK.map((n) => {
     const b = document.createElement('button');
@@ -292,6 +307,8 @@ function wire() {
   $('fiat').value = state.vs;
   $('fiat').addEventListener('change', (e) => setCurrency(e.target.value));
   renderQuick();
+  $('converter').classList.toggle('swapped', state.swapped);
+  $('swapBtn').addEventListener('click', swap);
 
   for (const [id, side] of [['cryptoAmt', 'crypto'], ['fiatAmt', 'fiat']]) {
     $(id).addEventListener('input', () => { state.edited = side; recompute(); });
@@ -313,10 +330,11 @@ function wire() {
     if (e.key === 'Escape') { e.preventDefault(); $('picker').open ? closePicker() : appWindow.hide(); }
     else if (mod && e.key.toLowerCase() === 'k') { e.preventDefault(); openPicker(); }
     else if (e.key === '/' && !$('picker').open && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); openPicker(); }
+    else if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); swap(); }
     else if (mod && e.key.toLowerCase() === 'r') { e.preventDefault(); run(invoke('refresh')); }
     else if (mod && e.key.toLowerCase() === 'q') { e.preventDefault(); invoke('quit'); }
   });
-  window.addEventListener('focus', () => { if (!$('picker').open) $('cryptoAmt').focus(); });
+  window.addEventListener('focus', () => { if (!$('picker').open) topInput().focus(); });
   setInterval(renderStatus, 10_000);
 }
 

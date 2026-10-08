@@ -227,9 +227,18 @@ select.field-label option { color: var(--text); background: var(--surface); }
   border-radius: 50%;
   background: var(--bg);
   border: 1px solid var(--line-strong);
-  font: 700 13px var(--mono);
+  padding: 0;
   color: var(--muted);
+  cursor: pointer;
+  transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
 }
+.equals svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.equals:hover { color: var(--text); border-color: var(--text); }
+.equals:active { transform: scale(0.9); }
+.equals:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.swapped .equals svg { transform: rotate(180deg); }
+.swapped .field-fiat { order: -1; margin-top: 0; border-radius: var(--r-card) var(--r-card) 4px 4px; }
+.swapped .field-crypto { margin-top: 4px; border-radius: 4px 4px var(--r-card) var(--r-card); }
 
 .icon-btn {
   display: grid;

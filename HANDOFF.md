@@ -35,8 +35,8 @@ _Entry points, important modules, config, secrets location (not values)._
 
 - **Project:** `Crypto calculator`
 - **Branch:** `main`
-- **Last updated:** 2026-10-08 17:47:30 -03
-- **Built on commit:** 1d3a7cf — fix: credit volnix.io in site footer (Jonathan Carbiere, 2026-10-08)
+- **Last updated:** 2026-10-08 17:58:08 -03
+- **Built on commit:** 4112cbf — fix: let Esc and a close button leave the coin picker (Jonathan Carbiere, 2026-10-08)
 - **README says:** Live crypto ⇄ fiat converter that lives in your menu bar (macOS) or system tray (Windows, Linux).
 
 ## How to build / run / test
@@ -89,6 +89,7 @@ _Entry points, important modules, config, secrets location (not values)._
 
 ## Recent history
 
+- 4112cbf fix: let Esc and a close button leave the coin picker _(Jonathan Carbiere, 2026-10-08)_
 - 1d3a7cf fix: credit volnix.io in site footer _(Jonathan Carbiere, 2026-10-08)_
 - a0aac1f chore: add v2.0.0 packages for macOS, Windows and Linux _(Jonathan Carbiere, 2026-10-08)_
 - f904d04 chore: drop stray screenshots and local .netlify state _(Jonathan Carbiere, 2026-10-08)_
