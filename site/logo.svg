@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Crypto Calculator">
+  <defs>
+    <linearGradient id="bg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1024" y2="1024">
+      <stop offset="0" stop-color="#1D2433"/><stop offset="1" stop-color="#0A0D13"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="0.2" y1="0.1" x2="0.8" y2="0.95">
+      <stop offset="0" stop-color="#FFC56B"/><stop offset="1" stop-color="#F7931A"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7CF5DF"/><stop offset="1" stop-color="#22B8A4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="228" fill="url(#bg)"/>
+  <circle cx="616" cy="424" r="224" fill="none" stroke="url(#ring)" stroke-width="60"/>
+  <circle cx="420" cy="600" r="276" fill="url(#bg)"/>
+  <circle cx="420" cy="600" r="250" fill="url(#coin)"/>
+  <circle cx="420" cy="600" r="222" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="8"/>
+  <g fill="none" stroke="#121722" stroke-width="44" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M310 548H530M480 498l50 50-50 50"/>
+    <path d="M530 652H310M360 602l-50 50 50 50"/>
+  </g>
+</svg>

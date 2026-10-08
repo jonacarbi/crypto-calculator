@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crypto Calculator — crypto in your currency, one click away</title>
+  <meta name="description" content="A free, open-source menu bar and system tray app for macOS, Windows and Linux. Live prices, a 7-day trend and a two-way converter for the top 100 coins.">
+  <meta property="og:title" content="Crypto Calculator">
+  <meta property="og:description" content="Crypto in your currency, one click from your menu bar. Free for macOS, Windows and Linux.">
+  <meta property="og:image" content="/og.png">
+  <meta name="theme-color" content="#f4efe6">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="/" aria-label="Crypto Calculator home">
+      <img src="logo.svg" width="32" height="32" alt="">
+      <span>Crypto Calculator</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#features">Features</a>
+      <a href="#download">Download</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/jonacarbi/crypto-calculator">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <p class="eyebrow">v2 · macOS · Windows · Linux</p>
+        <h1 id="hero-heading">Crypto in <em class="fiat">your currency.</em><br>One click away.</h1>
+        <p class="lede">Crypto Calculator lives in your menu bar or system tray. You get a live price, a 7-day trend and a converter that works both ways for the top 100 coins. No browser tab and no account.</p>
+        <div class="ctas">
+          <a class="btn primary" id="heroCta" href="#download">Download free</a>
+          <a class="btn ghost" href="#download">All platforms</a>
+        </div>
+        <p class="fine" id="heroFine">Free and open source · built with Rust</p>
+      </div>
+
+      <figure class="stage">
+        <div class="menubar" aria-label="Menu bar preview">
+          <span class="mb-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="mb-tray" id="tray">₿ …</span>
+          <span class="mb-clock" id="clock" aria-hidden="true"></span>
+        </div>
+        <div class="popover">
+          <iframe src="demo/index.html" title="Crypto Calculator live demo" width="380" height="480" loading="eager"></iframe>
+        </div>
+        <figcaption><span class="live-dot" aria-hidden="true"></span> Live demo: the real app UI on CoinGecko prices. Type an amount, or press <kbd>/</kbd> to pick a coin.</figcaption>
+      </figure>
+    </section>
+
+    <section class="friction" aria-labelledby="friction-heading">
+      <h2 id="friction-heading" class="sr-only">Before and after</h2>
+      <div class="before">
+        <p class="tag">Before</p>
+        <ol>
+          <li>Open a browser</li>
+          <li>Find an exchange</li>
+          <li>Copy the price</li>
+          <li>Open a calculator</li>
+          <li>Do the maths</li>
+        </ol>
+      </div>
+      <div class="after">
+        <p class="tag">With Crypto Calculator</p>
+        <p class="after-line">Glance at <span class="pill">₿ $81,692</span> in your menu bar. Click it for everything else.</p>
+      </div>
+    </section>
+
+    <section id="features" class="features" aria-labelledby="features-heading">
+      <h2 id="features-heading">Small app, sharp edges filed off.</h2>
+      <div class="bento">
+        <article class="card wide convert">
+          <h3>Converts both ways</h3>
+          <p>Type in either field and the other one updates. Decimal commas and points both work, so <code>0,5</code> and <code>0.5</code> mean the same thing. One click copies the result.</p>
+          <div class="demo-pair" aria-hidden="true">
+            <span class="chip crypto">BTC</span><span class="num">0.25</span>
+            <span class="eq">=</span>
+            <span class="chip fiat">USD</span><span class="num">20,423.00</span>
+          </div>
+        </article>
+        <article class="card coins">
+          <h3>Top 100 coins</h3>
+          <p>Search by name or ticker. <kbd>⌘</kbd><kbd>K</kbd> opens the picker from anywhere in the app.</p>
+        </article>
+        <article class="card fiats">
+          <h3>9 currencies</h3>
+          <ul class="chips" aria-label="Supported currencies">
+            <li>USD</li><li>EUR</li><li>GBP</li><li>JPY</li><li>CAD</li><li>AUD</li><li>CHF</li><li>BRL</li><li>INR</li>
+          </ul>
+        </article>
+        <article class="card keys">
+          <h3>Keyboard-first</h3>
+          <dl>
+            <div><dt><kbd>/</kbd></dt><dd>Pick a coin</dd></div>
+            <div><dt><kbd>⌘</kbd><kbd>R</kbd></dt><dd>Refresh</dd></div>
+            <div><dt><kbd>Esc</kbd></dt><dd>Hide</dd></div>
+            <div><dt><kbd>⌘</kbd><kbd>Q</kbd></dt><dd>Quit</dd></div>
+          </dl>
+        </article>
+        <article class="card honest">
+          <h3>Never quietly wrong</h3>
+          <p>Prices refresh every minute. If an update fails, the app says so and the tray price gets a <span class="warn">⚠</span>. It won't show an old price as if it were new.</p>
+        </article>
+        <article class="card private">
+          <h3>Tiny and private</h3>
+          <p>Native Rust and Tauri, with no Electron. There is no account and no tracking. The only server it talks to is CoinGecko.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="download" class="download" aria-labelledby="download-heading">
+      <h2 id="download-heading">Download</h2>
+      <p class="sub" id="releaseNote">Builds come from the <a href="https://github.com/jonacarbi/crypto-calculator/releases">latest GitHub release</a>.</p>
+      <div class="platforms">
+        <article class="platform" data-os="mac">
+          <h3>macOS</h3>
+          <p class="req">macOS 11+, Apple Silicon and Intel</p>
+          <ul class="files" data-exts=".dmg"></ul>
+          <p class="note">On first launch, macOS may block the app because it isn't notarized. Go to System Settings → Privacy &amp; Security → <strong>Open Anyway</strong>.</p>
+        </article>
+        <article class="platform" data-os="windows">
+          <h3>Windows</h3>
+          <p class="req">Windows 10 / 11, x64</p>
+          <ul class="files" data-exts="-setup.exe .msi"></ul>
+          <p class="note">SmartScreen may warn about an unknown publisher. Choose More info → <strong>Run anyway</strong>.</p>
+        </article>
+        <article class="platform" data-os="linux">
+          <h3>Linux</h3>
+          <p class="req">x64 · AppImage, Debian/Ubuntu, Fedora</p>
+          <ul class="files" data-exts=".AppImage .deb .rpm"></ul>
+          <p class="note">GNOME needs the AppIndicator extension to show tray icons. Open the app from its tray menu.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="faq" class="faq" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Questions</h2>
+      <details>
+        <summary>Is it really free?</summary>
+        <p>Yes. It has no ads, no subscription and no account, and the <a href="https://github.com/jonacarbi/crypto-calculator">source is on GitHub</a>.</p>
+      </details>
+      <details>
+        <summary>Where do the prices come from?</summary>
+        <p>From CoinGecko's public market data, refreshed every 60 seconds. If CoinGecko rate-limits or can't be reached, the app shows how old its last price is.</p>
+      </details>
+      <details>
+        <summary>Does it collect any data?</summary>
+        <p>No. Your coin and currency choices stay on your computer. The only network requests go to CoinGecko for prices and coin icons.</p>
+      </details>
+      <details>
+        <summary>Why does my system warn me when I open it?</summary>
+        <p>The builds aren't signed with a paid Apple or Microsoft certificate. The steps under each download get you past the warning. If you'd rather not trust a binary, you can build it from source.</p>
+      </details>
+      <details>
+        <summary>How do I start it at login?</summary>
+        <p>On macOS, add it under System Settings → General → Login Items. On Windows, put a shortcut in <code>shell:startup</code>. On Linux, use your desktop's autostart settings.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <img src="logo.svg" width="24" height="24" alt="">
+    <p>Crypto Calculator · Made by Jona Carbi · Prices by <a href="https://www.coingecko.com">CoinGecko</a> · <a href="https://github.com/jonacarbi/crypto-calculator">Source</a></p>
+  </footer>
+</body>
+</html>

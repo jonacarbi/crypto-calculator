@@ -35,8 +35,8 @@ _Entry points, important modules, config, secrets location (not values)._
 
 - **Project:** `Crypto calculator`
 - **Branch:** `main`
-- **Last updated:** 2026-10-08 16:51:25 -03
-- **Built on commit:** c60f359 — fix: apply adversarial review must-fixes (Codex-judged) (Jonathan Carbiere, 2026-10-08)
+- **Last updated:** 2026-10-08 17:00:46 -03
+- **Built on commit:** 8ff5b60 — chore: ignore local v1 app backup (Jonathan Carbiere, 2026-10-08)
 - **README says:** Live crypto ⇄ fiat converter that lives in your menu bar (macOS) or system tray (Windows, Linux).
 
 ## How to build / run / test
@@ -52,37 +52,58 @@ _Entry points, important modules, config, secrets location (not values)._
 
 - .github/
 - .gitignore
+- .netlify/
 - design/
 - HANDOFF.md
 - legacy-swift/
+- netlify.toml
 - package-lock.json
 - package.json
 - README.md
+- scripts/
+- site-1440.png
+- site-320.png
+- site-768.png
+- site/
 - src-tauri/
 - src/
 - tests/
 
 ## Languages
 
-- .png — 23 file(s)
+- .png — 27 file(s)
 - .json — 5 file(s)
+- .svg — 4 file(s)
 - .rs — 4 file(s)
+- .js — 4 file(s)
+- .toml — 3 file(s)
 - .swift — 3 file(s)
-- .svg — 3 file(s)
 - .md — 3 file(s)
-- .js — 2 file(s)
+- .html — 2 file(s)
+- .css — 2 file(s)
 - .yml — 1 file(s)
-- .toml — 1 file(s)
-- .plist — 1 file(s)
-- .pbxproj — 1 file(s)
-- .mjs — 1 file(s)
+- .sh — 1 file(s)
 
 ## Changes in this commit
 
+- M	.github/workflows/build.yml
 - M	.gitignore
+- A	.netlify/netlify.toml
+- A	netlify.toml
+- A	scripts/site.sh
+- A	site-1440.png
+- A	site-320.png
+- A	site-768.png
+- A	site/app.js
+- A	site/demo/mock.js
+- A	site/index.html
+- A	site/logo.svg
+- A	site/og.png
+- A	site/styles.css
 
 ## Recent history
 
+- 8ff5b60 chore: ignore local v1 app backup _(Jonathan Carbiere, 2026-10-08)_
 - c60f359 fix: apply adversarial review must-fixes (Codex-judged) _(Jonathan Carbiere, 2026-10-08)_
 - 7ad4b10 feat: rewrite Crypto Calculator in Rust (Tauri 2) for macOS, Windows and Linux _(Jonathan Carbiere, 2026-10-08)_
 

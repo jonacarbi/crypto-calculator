@@ -6,6 +6,9 @@ on:
     tags: ['v*']
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   bundle:
     strategy:
@@ -58,3 +61,15 @@ jobs:
             ${{ matrix.out }}/rpm/*.rpm
             ${{ matrix.out }}/appimage/*.AppImage
           if-no-files-found: error
+
+      - name: Attach to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ${{ matrix.out }}/dmg/*.dmg
+            ${{ matrix.out }}/nsis/*.exe
+            ${{ matrix.out }}/msi/*.msi
+            ${{ matrix.out }}/deb/*.deb
+            ${{ matrix.out }}/rpm/*.rpm
+            ${{ matrix.out }}/appimage/*.AppImage

@@ -1,0 +1,13 @@
+[build]
+  command = "sh scripts/site.sh"
+  publish = "site"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://coin-images.coingecko.com https://assets.coingecko.com; connect-src https://api.coingecko.com https://api.github.com; frame-src 'self'; frame-ancestors 'self'; object-src 'none'; base-uri 'self'"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"

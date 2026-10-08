@@ -6,3 +6,5 @@ dist/
 .codegraph/
 legacy-swift/**/xcuserdata/
 legacy-swift/*.app
+site/demo/*
+!site/demo/mock.js
