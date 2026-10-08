@@ -329,6 +329,9 @@ select.field-label option { color: var(--text); background: var(--surface); }
 }
 .picker-head input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-soft); }
 .picker-head input:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.picker-close { padding: 0; border: 0; background: none; border-radius: 6px; }
+.picker-close:hover kbd { color: var(--text); border-color: var(--line-strong); }
+.picker-close:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 kbd { font: 600 10px var(--mono); color: var(--muted); padding: 3px 6px; border: 1px solid var(--line); border-radius: 6px; }
 
 .coin-list { flex: 1; margin: 0; padding: 6px; list-style: none; overflow-y: auto; scrollbar-width: thin; }

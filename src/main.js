@@ -161,13 +161,17 @@ async function setCurrency(vs) {
   if (!ok && state.vs === vs && state.snap) showCurrency(state.snap.vs);
 }
 
+function closePicker() {
+  $('picker').close();
+  $('cryptoAmt').focus();
+}
+
 function selectCoin(id) {
   state.coinId = id;
   store.set('coin', id);
-  $('picker').close();
   renderHero();
   recompute();
-  $('cryptoAmt').focus();
+  closePicker();
 }
 
 async function copy(btn) {
@@ -298,6 +302,7 @@ function wire() {
   $('quitBtn').addEventListener('click', () => invoke('quit'));
   $('search').addEventListener('input', () => { state.active = 0; renderList(); });
   $('search').addEventListener('keydown', onSearchKey);
+  $('pickerClose').addEventListener('click', closePicker);
   $('coinList').addEventListener('click', (e) => {
     const li = e.target.closest('li[data-id]');
     if (li) selectCoin(li.dataset.id);
@@ -305,7 +310,7 @@ function wire() {
 
   document.addEventListener('keydown', (e) => {
     const mod = e.metaKey || e.ctrlKey;
-    if (e.key === 'Escape' && !$('picker').open) appWindow.hide();
+    if (e.key === 'Escape') { e.preventDefault(); $('picker').open ? closePicker() : appWindow.hide(); }
     else if (mod && e.key.toLowerCase() === 'k') { e.preventDefault(); openPicker(); }
     else if (e.key === '/' && !$('picker').open && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); openPicker(); }
     else if (mod && e.key.toLowerCase() === 'r') { e.preventDefault(); run(invoke('refresh')); }
