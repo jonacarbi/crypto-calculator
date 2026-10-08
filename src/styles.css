@@ -38,9 +38,9 @@
     --line-strong: rgb(30 22 10 / 0.16);
     --text: #18140e;
     --muted: #6c6457;
-    --amber: #b86200;
+    --amber: #9a5200;
     --amber-soft: rgb(247 147 26 / 0.14);
-    --mint: #0b8a77;
+    --mint: #087566;
     --mint-soft: rgb(11 138 119 / 0.1);
     --up: #12804b;
     --down: #c63434;
@@ -66,6 +66,7 @@ button { cursor: pointer; }
 svg { display: block; }
 
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 .panel {
   position: relative;
@@ -176,7 +177,7 @@ svg { display: block; }
 }
 .field-crypto { border-radius: var(--r-card) var(--r-card) 4px 4px; box-shadow: inset 3px 0 0 var(--amber); }
 .field-fiat { margin-top: 4px; border-radius: 4px 4px var(--r-card) var(--r-card); box-shadow: inset 3px 0 0 var(--mint); }
-.field:focus-within { border-color: var(--line-strong); }
+.field:focus-within { border-color: var(--line-strong); outline: 2px solid var(--focus); outline-offset: -2px; }
 .field-crypto:focus-within { box-shadow: inset 3px 0 0 var(--amber), 0 0 0 3px var(--amber-soft); }
 .field-fiat:focus-within { box-shadow: inset 3px 0 0 var(--mint), 0 0 0 3px var(--mint-soft); }
 
@@ -210,7 +211,7 @@ select.field-label option { color: var(--text); background: var(--surface); }
   letter-spacing: -0.02em;
   user-select: text;
 }
-.field input::placeholder { color: var(--surface-3); }
+.field input::placeholder { color: var(--muted); opacity: 0.7; }
 .field input[aria-invalid="true"] { color: var(--down); }
 
 .equals {
@@ -300,6 +301,7 @@ select.field-label option { color: var(--text); background: var(--surface); }
   margin: 0;
   padding: 0;
   border: 0;
+  border-radius: var(--r-panel);
   display: none;
   flex-direction: column;
   background: var(--bg);
@@ -326,6 +328,7 @@ select.field-label option { color: var(--text); background: var(--surface); }
   user-select: text;
 }
 .picker-head input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-soft); }
+.picker-head input:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
 kbd { font: 600 10px var(--mono); color: var(--muted); padding: 3px 6px; border: 1px solid var(--line); border-radius: 6px; }
 
 .coin-list { flex: 1; margin: 0; padding: 6px; list-style: none; overflow-y: auto; scrollbar-width: thin; }

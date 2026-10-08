@@ -9,7 +9,8 @@ export function parseAmount(raw) {
   if (dot >= 0 && comma >= 0) {
     s = dot > comma ? s.replace(/,/g, '') : s.replace(/\./g, '').replace(',', '.');
   } else if (comma >= 0) {
-    s = /^\d{1,3}(,\d{3})+$/.test(s) ? s.replace(/,/g, '') : s.replace(',', '.');
+    // "1,234" is grouping, but "0,500" can only be a decimal comma.
+    s = /^[1-9]\d{0,2}(,\d{3})+$/.test(s) ? s.replace(/,/g, '') : s.replace(',', '.');
   }
   if (!/^\d*\.?\d*$/.test(s) || s === '.') return null;
   const n = Number(s);

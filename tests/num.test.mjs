@@ -6,6 +6,7 @@ test('parseAmount handles both decimal conventions', () => {
   assert.equal(parseAmount('1,234.5'), 1234.5);
   assert.equal(parseAmount('1.234,5'), 1234.5);
   assert.equal(parseAmount('0,5'), 0.5);
+  assert.equal(parseAmount('0,500'), 0.5);
   assert.equal(parseAmount('1,000'), 1000);
   assert.equal(parseAmount('1 000'), 1000);
   assert.equal(parseAmount('.25'), 0.25);

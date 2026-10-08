@@ -25,7 +25,7 @@ pub struct Coin {
     pub symbol: String,
     pub name: String,
     #[serde(default)]
-    pub image: String,
+    pub image: Option<String>,
     pub current_price: Option<f64>,
     pub price_change_percentage_24h: Option<f64>,
     pub market_cap_rank: Option<u32>,
@@ -82,10 +82,11 @@ pub async fn fetch(client: &reqwest::Client, vs: &str) -> Result<Vec<Coin>, Stri
         .await
         .map_err(|_| "Can't reach CoinGecko — check your connection".to_string())?;
     match res.status().as_u16() {
-        200 => res
-            .json::<Vec<Coin>>()
-            .await
-            .map_err(|e| format!("Unexpected data from CoinGecko: {e}")),
+        200 => match res.json::<Vec<Coin>>().await {
+            Ok(coins) if coins.is_empty() => Err("CoinGecko returned no coins".into()),
+            Ok(coins) => Ok(coins),
+            Err(e) => Err(format!("Unexpected data from CoinGecko: {e}")),
+        },
         429 => Err("CoinGecko rate limit hit — retrying shortly".into()),
         code => Err(format!("CoinGecko returned HTTP {code}")),
     }
@@ -94,6 +95,14 @@ pub async fn fetch(client: &reqwest::Client, vs: &str) -> Result<Vec<Coin>, Stri
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn tolerates_null_fields() {
+        let raw = r#"[{"id":"x","symbol":"x","name":"X","image":null,"current_price":null,
+            "price_change_percentage_24h":null,"market_cap_rank":null,"sparkline_in_7d":null}]"#;
+        let coins: Vec<Coin> = serde_json::from_str(raw).unwrap();
+        assert!(coins[0].image.is_none() && coins[0].current_price.is_none());
+    }
 
     #[test]
     fn formats_tray_prices() {

@@ -11,6 +11,11 @@ use tauri::{AppHandle, Emitter, Manager, RunEvent, State, WebviewWindow, WindowE
 use tauri_plugin_positioner::{Position, WindowExt};
 
 const TRAY_ID: &str = "main";
+// macOS tints a black template glyph; other trays need the full-colour logo or it vanishes on dark panels.
+#[cfg(target_os = "macos")]
+const TRAY_ICON: &[u8] = include_bytes!("../icons/tray.png");
+#[cfg(not(target_os = "macos"))]
+const TRAY_ICON: &[u8] = include_bytes!("../icons/64x64.png");
 const REFRESH_EVERY: Duration = Duration::from_secs(60);
 const RETRY_AFTER_ERROR: Duration = Duration::from_secs(20);
 /// A tray click that lands right after the window auto-hid on blur must not re-open it.
@@ -29,7 +34,8 @@ fn now_ms() -> u64 {
         .map_or(0, |d| d.as_millis() as u64)
 }
 
-fn update_tray(app: &AppHandle, snap: &Snapshot) {
+/// `error` marks the shown price as stale so the tray never silently lies.
+fn update_tray(app: &AppHandle, snap: &Snapshot, error: Option<&str>) {
     let Some(tray) = app.tray_by_id(TRAY_ID) else { return };
     let Some(price) = snap
         .coins
@@ -40,24 +46,31 @@ fn update_tray(app: &AppHandle, snap: &Snapshot) {
         return;
     };
     let text = market::format_price(price, &snap.vs);
-    let _ = tray.set_title(Some(format!("₿ {text}")));
-    let _ = tray.set_tooltip(Some(format!("Bitcoin {text}")));
+    let (mark, note) = error.map_or(("", String::new()), |e| (" ⚠", format!(" (stale: {e})")));
+    let _ = tray.set_title(Some(format!("₿ {text}{mark}")));
+    let _ = tray.set_tooltip(Some(format!("Bitcoin {text}{note}")));
 }
 
 async fn refresh_now(app: &AppHandle) -> Result<Snapshot, String> {
     let state = app.state::<AppState>();
     let vs = state.vs.lock().unwrap().clone();
     let coins = market::fetch(&state.client, &vs).await.inspect_err(|e| {
+        if let Some(last) = state.last.lock().unwrap().as_ref() {
+            update_tray(app, last, Some(e));
+        }
         let _ = app.emit("markets-error", e);
     })?;
-    // The currency may have changed while this request was in flight; drop the stale result.
-    if *state.vs.lock().unwrap() != vs {
+    // Hold the vs lock while publishing so set_currency can't interleave: a result for a
+    // currency we've since left is dropped instead of overwriting the newer snapshot.
+    let current = state.vs.lock().unwrap();
+    if *current != vs {
         return Err("Currency changed during refresh".into());
     }
     let snap = Snapshot { vs, coins, fetched_at: now_ms() };
-    update_tray(app, &snap);
+    update_tray(app, &snap, None);
     *state.last.lock().unwrap() = Some(snap.clone());
     let _ = app.emit("markets", &snap);
+    drop(current);
     Ok(snap)
 }
 
@@ -127,8 +140,8 @@ fn build_tray(app: &AppHandle) -> tauri::Result<()> {
     let menu = Menu::with_items(app, &[&open, &refresh, &sep, &quit])?;
 
     TrayIconBuilder::with_id(TRAY_ID)
-        .icon(Image::from_bytes(include_bytes!("../icons/tray.png"))?)
-        .icon_as_template(true)
+        .icon(Image::from_bytes(TRAY_ICON)?)
+        .icon_as_template(cfg!(target_os = "macos"))
         .title("₿ …")
         .tooltip("Crypto Calculator")
         .menu(&menu)

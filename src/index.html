@@ -60,7 +60,8 @@
 
     <footer class="status">
       <span class="dot" id="dot" aria-hidden="true"></span>
-      <span class="status-text" id="status" role="status">Connecting…</span>
+      <span class="status-text" id="status">Connecting…</span>
+      <span class="sr-only" id="announce" role="status"></span>
       <button class="icon-btn" type="button" id="refreshBtn" aria-label="Refresh prices" title="Refresh (⌘R)">
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8a5 5 0 1 1-1.6-3.7M13 3v3h-3"/></svg>
       </button>
@@ -69,7 +70,7 @@
 
     <dialog class="picker" id="picker" aria-label="Choose a coin">
       <div class="picker-head">
-        <input id="search" type="search" placeholder="Search top 100 coins" autocomplete="off" spellcheck="false"
+        <input id="search" type="text" aria-label="Search coins" placeholder="Search top 100 coins" autocomplete="off" spellcheck="false"
                role="combobox" aria-controls="coinList" aria-expanded="true" aria-autocomplete="list">
         <kbd>esc</kbd>
       </div>

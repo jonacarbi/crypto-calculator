@@ -40,6 +40,6 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "macOS": { "minimumSystemVersion": "11.0" }
+    "macOS": { "minimumSystemVersion": "11.0", "signingIdentity": "-" }
   }
 }

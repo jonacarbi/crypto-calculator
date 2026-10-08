@@ -35,8 +35,8 @@ _Entry points, important modules, config, secrets location (not values)._
 
 - **Project:** `Crypto calculator`
 - **Branch:** `main`
-- **Last updated:** 2026-10-08 16:34:31 -03
-- **Built on commit:** (no commits yet)
+- **Last updated:** 2026-10-08 16:45:09 -03
+- **Built on commit:** 7ad4b10 — feat: rewrite Crypto Calculator in Rust (Tauri 2) for macOS, Windows and Linux (Jonathan Carbiere, 2026-10-08)
 - **README says:** Live crypto ⇄ fiat converter that lives in your menu bar (macOS) or system tray (Windows, Linux).
 
 ## How to build / run / test
@@ -53,6 +53,7 @@ _Entry points, important modules, config, secrets location (not values)._
 - .github/
 - .gitignore
 - design/
+- HANDOFF.md
 - legacy-swift/
 - package-lock.json
 - package.json
@@ -68,7 +69,7 @@ _Entry points, important modules, config, secrets location (not values)._
 - .rs — 4 file(s)
 - .swift — 3 file(s)
 - .svg — 3 file(s)
-- .md — 2 file(s)
+- .md — 3 file(s)
 - .js — 2 file(s)
 - .yml — 1 file(s)
 - .toml — 1 file(s)
@@ -78,63 +79,19 @@ _Entry points, important modules, config, secrets location (not values)._
 
 ## Changes in this commit
 
-- A	.github/workflows/build.yml
-- A	.gitignore
-- A	README.md
-- A	design/logo-1024.png
-- A	design/logo.svg
-- A	design/tray.svg
-- A	legacy-swift/BTCBar.xcodeproj/project.pbxproj
-- A	legacy-swift/BTCBar/Assets.xcassets/AppIcon.appiconset/Contents.json
-- A	legacy-swift/BTCBar/Assets.xcassets/AppIcon.appiconset/icon-128.png
-- A	legacy-swift/BTCBar/Assets.xcassets/AppIcon.appiconset/icon-16.png
-- A	legacy-swift/BTCBar/Assets.xcassets/AppIcon.appiconset/icon-256.png
-- A	legacy-swift/BTCBar/Assets.xcassets/AppIcon.appiconset/icon-32.png
-- A	legacy-swift/BTCBar/Assets.xcassets/AppIcon.appiconset/icon-512.png
-- A	legacy-swift/BTCBar/Assets.xcassets/AppIcon.appiconset/icoon-1024.png
-- A	legacy-swift/BTCBar/BTCBar.entitlements
-- A	legacy-swift/BTCBar/BTCBarApp.swift
-- A	legacy-swift/BTCBar/BitcoinPriceService.swift
-- A	legacy-swift/BTCBar/ContentView.swift
-- A	legacy-swift/BTCBar/Info.plist
-- A	legacy-swift/README.md
-- A	package-lock.json
-- A	package.json
-- A	src-tauri/Cargo.lock
-- A	src-tauri/Cargo.toml
-- A	src-tauri/build.rs
-- A	src-tauri/capabilities/default.json
-- A	src-tauri/icons/128x128.png
-- A	src-tauri/icons/128x128@2x.png
-- A	src-tauri/icons/32x32.png
-- A	src-tauri/icons/64x64.png
-- A	src-tauri/icons/Square107x107Logo.png
-- A	src-tauri/icons/Square142x142Logo.png
-- A	src-tauri/icons/Square150x150Logo.png
-- A	src-tauri/icons/Square284x284Logo.png
-- A	src-tauri/icons/Square30x30Logo.png
-- A	src-tauri/icons/Square310x310Logo.png
-- A	src-tauri/icons/Square44x44Logo.png
-- A	src-tauri/icons/Square71x71Logo.png
-- A	src-tauri/icons/Square89x89Logo.png
-- A	src-tauri/icons/StoreLogo.png
-- A	src-tauri/icons/icon.icns
-- A	src-tauri/icons/icon.ico
-- A	src-tauri/icons/icon.png
-- A	src-tauri/icons/tray.png
-- A	src-tauri/src/lib.rs
-- A	src-tauri/src/main.rs
-- A	src-tauri/src/market.rs
-- A	src-tauri/tauri.conf.json
-- A	src/favicon.svg
-- A	src/index.html
-- A	src/main.js
-- A	src/num.js
-- A	src/styles.css
-- A	tests/num.test.mjs
+- M	.github/workflows/build.yml
+- M	HANDOFF.md
+- M	src-tauri/src/lib.rs
+- M	src-tauri/src/market.rs
+- M	src-tauri/tauri.conf.json
+- M	src/index.html
+- M	src/main.js
+- M	src/num.js
+- M	src/styles.css
+- M	tests/num.test.mjs
 
 ## Recent history
 
-- (no commits yet)
+- 7ad4b10 feat: rewrite Crypto Calculator in Rust (Tauri 2) for macOS, Windows and Linux _(Jonathan Carbiere, 2026-10-08)_
 
 <!-- HANDOFF:AUTO:END -->

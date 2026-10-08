@@ -52,7 +52,6 @@ jobs:
           name: crypto-calculator-${{ runner.os }}
           path: |
             ${{ matrix.out }}/dmg/*.dmg
-            ${{ matrix.out }}/macos/*.app
             ${{ matrix.out }}/nsis/*.exe
             ${{ matrix.out }}/msi/*.msi
             ${{ matrix.out }}/deb/*.deb

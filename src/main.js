@@ -27,7 +27,7 @@ const state = {
 const coin = () => state.snap?.coins.find((c) => c.id === state.coinId) ?? state.snap?.coins[0] ?? null;
 const money = (value, digits) =>
   new Intl.NumberFormat(undefined, {
-    style: 'currency', currency: state.vs.toUpperCase(),
+    style: 'currency', currency: (state.snap?.vs ?? state.vs).toUpperCase(),
     minimumFractionDigits: digits, maximumFractionDigits: digits,
   }).format(value);
 const pct = (v) => `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`;
@@ -86,7 +86,8 @@ function recompute() {
   const [src, dst] = state.edited === 'crypto' ? [crypto, fiat] : [fiat, crypto];
   const amount = parseAmount(src.value);
   src.setAttribute('aria-invalid', String(src.value.trim() !== '' && amount === null));
-  if (amount === null || !price) {
+  // While a currency switch is in flight the snapshot is still priced in the old one.
+  if (amount === null || !price || state.snap.vs !== state.vs) {
     dst.value = '';
     return;
   }
@@ -106,6 +107,7 @@ function renderStatus() {
   const dot = $('dot');
   const status = $('status');
   const fetched = state.snap?.fetched_at;
+  $('announce').textContent = state.error ?? '';
   if (state.error) {
     dot.className = 'dot error';
     status.textContent = fetched ? `${state.error} · last ${ago(fetched)}` : state.error;
@@ -128,26 +130,35 @@ function apply(snap) {
 }
 
 /* ---------- actions ---------- */
+/** Resolves false only on a real failure (a superseded currency switch isn't one). */
 async function run(promise) {
   $('refreshBtn').classList.add('spinning');
   try {
     apply(await promise);
+    return true;
   } catch (err) {
-    if (!String(err).includes('Currency changed')) {
-      state.error = String(err);
-      renderStatus();
-    }
+    if (String(err).includes('Currency changed')) return true;
+    state.error = String(err);
+    renderStatus();
+    return false;
   } finally {
     $('refreshBtn').classList.remove('spinning');
   }
 }
 
-function setCurrency(vs) {
+function showCurrency(vs) {
   state.vs = vs;
   store.set('vs', vs);
   $('fiat').value = vs;
   renderQuick();
-  run(invoke('set_currency', { vs }));
+  recompute();
+}
+
+async function setCurrency(vs) {
+  showCurrency(vs);
+  const ok = await run(invoke('set_currency', { vs }));
+  // Failed switch: fall back to the currency our prices are actually in.
+  if (!ok && state.vs === vs && state.snap) showCurrency(state.snap.vs);
 }
 
 function selectCoin(id) {
@@ -164,9 +175,13 @@ async function copy(btn) {
   if (!value) return;
   try {
     await navigator.clipboard.writeText(value);
+    btn.dataset.label ??= btn.getAttribute('aria-label');
     btn.classList.add('done');
     btn.setAttribute('aria-label', 'Copied');
-    setTimeout(() => btn.classList.remove('done'), 1200);
+    setTimeout(() => {
+      btn.classList.remove('done');
+      btn.setAttribute('aria-label', btn.dataset.label);
+    }, 1200);
   } catch {
     state.error = 'Clipboard unavailable';
     renderStatus();
@@ -191,7 +206,7 @@ function renderList() {
   list.replaceChildren(...items.map((c, i) => {
     const li = document.createElement('li');
     li.id = `opt-${c.id}`;
-    li.role = 'option';
+    li.setAttribute('role', 'option');
     li.dataset.id = c.id;
     li.setAttribute('aria-selected', String(i === state.active));
     if (c.id === state.coinId) li.classList.add('current');
@@ -219,6 +234,7 @@ function renderList() {
   if (!items.length) {
     const empty = document.createElement('li');
     empty.className = 'empty';
+    empty.setAttribute('role', 'presentation');
     empty.textContent = state.snap ? 'No coin matches' : 'Loading coins…';
     list.append(empty);
   }
@@ -303,7 +319,7 @@ async function init() {
   wire();
   listen('markets', (e) => apply(e.payload));
   listen('markets-error', (e) => { state.error = e.payload; renderStatus(); });
-  const snap = await invoke('get_snapshot');
+  const snap = await invoke('get_snapshot').catch(() => null);
   if (snap?.vs === state.vs) apply(snap);
   else run(invoke('set_currency', { vs: state.vs }));
 }
