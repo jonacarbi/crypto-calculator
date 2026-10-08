@@ -35,8 +35,8 @@ _Entry points, important modules, config, secrets location (not values)._
 
 - **Project:** `Crypto calculator`
 - **Branch:** `main`
-- **Last updated:** 2026-10-08 17:13:17 -03
-- **Built on commit:** f904d04 — chore: drop stray screenshots and local .netlify state (Jonathan Carbiere, 2026-10-08)
+- **Last updated:** 2026-10-08 17:20:16 -03
+- **Built on commit:** a0aac1f — chore: add v2.0.0 packages for macOS, Windows and Linux (Jonathan Carbiere, 2026-10-08)
 - **README says:** Live crypto ⇄ fiat converter that lives in your menu bar (macOS) or system tray (Windows, Linux).
 
 ## How to build / run / test
@@ -83,16 +83,11 @@ _Entry points, important modules, config, secrets location (not values)._
 
 ## Changes in this commit
 
-- A	releases/v2.0.0/Crypto.Calculator-2.0.0-1.x86_64.rpm
-- A	releases/v2.0.0/Crypto.Calculator_2.0.0_amd64.AppImage
-- A	releases/v2.0.0/Crypto.Calculator_2.0.0_amd64.deb
-- A	releases/v2.0.0/Crypto.Calculator_2.0.0_universal.dmg
-- A	releases/v2.0.0/Crypto.Calculator_2.0.0_x64-setup.exe
-- A	releases/v2.0.0/Crypto.Calculator_2.0.0_x64_en-US.msi
-- A	releases/v2.0.0/SHA256SUMS.txt
+- M	site/index.html
 
 ## Recent history
 
+- a0aac1f chore: add v2.0.0 packages for macOS, Windows and Linux _(Jonathan Carbiere, 2026-10-08)_
 - f904d04 chore: drop stray screenshots and local .netlify state _(Jonathan Carbiere, 2026-10-08)_
 - 1d4042f feat: landing page on Netlify and GitHub Release packages for every OS _(Jonathan Carbiere, 2026-10-08)_
 - 8ff5b60 chore: ignore local v1 app backup _(Jonathan Carbiere, 2026-10-08)_
