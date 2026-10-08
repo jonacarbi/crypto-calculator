@@ -1,0 +1,6 @@
+ae8a6f98e5560a75d4a58af0ee07b127dff14a1df696478916416c28a44f9a40  Crypto.Calculator_2.0.0_amd64.AppImage
+fa142650714bb19749a7f2011d016c4007eab5e3b76ff5149a3da46d56a86a45  Crypto.Calculator_2.0.0_amd64.deb
+9f462a81ae282a240318c60701dc0be512ab6302d244b8d46b88996fd6a6b6e2  Crypto.Calculator_2.0.0_universal.dmg
+7ea094675295ee5e2bf5e7420611e6920a96685ea5b59afcacf481c68e3e0658  Crypto.Calculator_2.0.0_x64_en-US.msi
+b45ff2465ef5a27682daad434be7df5f6b7b14d0232b8db0607448c030108af3  Crypto.Calculator_2.0.0_x64-setup.exe
+306a07bc8e2511c48556d24da604bc9ad7203a9d266e44dc8fb12a09951f8275  Crypto.Calculator-2.0.0-1.x86_64.rpm
