@@ -1,0 +1,7 @@
+node_modules/
+src-tauri/target/
+src-tauri/gen/
+dist/
+.DS_Store
+.codegraph/
+legacy-swift/**/xcuserdata/

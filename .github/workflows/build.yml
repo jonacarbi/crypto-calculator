@@ -1,0 +1,61 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  bundle:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            args: --target universal-apple-darwin
+            out: src-tauri/target/universal-apple-darwin/release/bundle
+          - os: ubuntu-22.04
+            args: ''
+            out: src-tauri/target/release/bundle
+          - os: windows-latest
+            args: ''
+            out: src-tauri/target/release/bundle
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Linux system deps
+        if: matrix.os == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev patchelf rpm
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.os == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - run: npm ci
+      - run: npm test
+      - run: npx tauri build ${{ matrix.args }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: crypto-calculator-${{ runner.os }}
+          path: |
+            ${{ matrix.out }}/dmg/*.dmg
+            ${{ matrix.out }}/macos/*.app
+            ${{ matrix.out }}/nsis/*.exe
+            ${{ matrix.out }}/msi/*.msi
+            ${{ matrix.out }}/deb/*.deb
+            ${{ matrix.out }}/rpm/*.rpm
+            ${{ matrix.out }}/appimage/*.AppImage
+          if-no-files-found: error

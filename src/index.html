@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crypto Calculator</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main class="panel">
+    <header class="hero" data-tauri-drag-region>
+      <div class="hero-top" data-tauri-drag-region>
+        <button class="coin-btn" id="coinBtn" type="button" aria-haspopup="dialog" aria-controls="picker"
+                title="Change coin (/)">
+          <span class="avatar" id="coinAvatar" aria-hidden="true"></span>
+          <span class="coin-text">
+            <strong id="coinName">Bitcoin</strong>
+            <small id="coinSym">BTC</small>
+          </span>
+          <svg class="chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <span class="rank" id="coinRank"></span>
+      </div>
+      <p class="price" id="price" aria-live="polite">—</p>
+      <p class="change" id="change"></p>
+      <svg class="spark" id="spark" viewBox="0 0 380 72" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="currentColor" stop-opacity=".28"/>
+            <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path class="spark-fill" id="sparkFill" fill="url(#sparkGrad)"/>
+        <path class="spark-line" id="sparkLine"/>
+      </svg>
+      <span class="spark-label">7D</span>
+    </header>
+
+    <section class="converter" aria-label="Converter">
+      <div class="field field-crypto">
+        <label class="field-label" for="cryptoAmt" id="cryptoLabel">BTC</label>
+        <input id="cryptoAmt" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="0">
+        <button class="icon-btn copy" type="button" data-copy="cryptoAmt" aria-label="Copy crypto amount">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8" height="8" rx="2"/><path d="M3 10V4a1 1 0 0 1 1-1h6"/></svg>
+        </button>
+      </div>
+      <span class="equals" aria-hidden="true">=</span>
+      <div class="field field-fiat">
+        <select id="fiat" class="field-label" aria-label="Fiat currency"></select>
+        <input id="fiatAmt" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="0"
+               aria-label="Fiat amount">
+        <button class="icon-btn copy" type="button" data-copy="fiatAmt" aria-label="Copy fiat amount">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8" height="8" rx="2"/><path d="M3 10V4a1 1 0 0 1 1-1h6"/></svg>
+        </button>
+      </div>
+      <div class="quick" role="group" aria-label="Quick fiat amounts" id="quick"></div>
+    </section>
+
+    <footer class="status">
+      <span class="dot" id="dot" aria-hidden="true"></span>
+      <span class="status-text" id="status" role="status">Connecting…</span>
+      <button class="icon-btn" type="button" id="refreshBtn" aria-label="Refresh prices" title="Refresh (⌘R)">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8a5 5 0 1 1-1.6-3.7M13 3v3h-3"/></svg>
+      </button>
+      <button class="text-btn" type="button" id="quitBtn" title="Quit (⌘Q)">Quit</button>
+    </footer>
+
+    <dialog class="picker" id="picker" aria-label="Choose a coin">
+      <div class="picker-head">
+        <input id="search" type="search" placeholder="Search top 100 coins" autocomplete="off" spellcheck="false"
+               role="combobox" aria-controls="coinList" aria-expanded="true" aria-autocomplete="list">
+        <kbd>esc</kbd>
+      </div>
+      <ul class="coin-list" id="coinList" role="listbox" aria-label="Coins"></ul>
+    </dialog>
+  </main>
+</body>
+</html>
