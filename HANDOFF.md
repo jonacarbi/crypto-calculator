@@ -35,8 +35,8 @@ _Entry points, important modules, config, secrets location (not values)._
 
 - **Project:** `Crypto calculator`
 - **Branch:** `main`
-- **Last updated:** 2026-10-08 17:58:08 -03
-- **Built on commit:** 4112cbf — fix: let Esc and a close button leave the coin picker (Jonathan Carbiere, 2026-10-08)
+- **Last updated:** 2026-10-08 19:32:18 -03
+- **Built on commit:** e970c45 — feat: swap button flips which currency you type in (Jonathan Carbiere, 2026-10-08)
 - **README says:** Live crypto ⇄ fiat converter that lives in your menu bar (macOS) or system tray (Windows, Linux).
 
 ## How to build / run / test
@@ -83,12 +83,12 @@ _Entry points, important modules, config, secrets location (not values)._
 
 ## Changes in this commit
 
-- M	src/index.html
-- M	src/main.js
-- M	src/styles.css
+- M	site/index.html
+- M	site/styles.css
 
 ## Recent history
 
+- e970c45 feat: swap button flips which currency you type in _(Jonathan Carbiere, 2026-10-08)_
 - 4112cbf fix: let Esc and a close button leave the coin picker _(Jonathan Carbiere, 2026-10-08)_
 - 1d3a7cf fix: credit volnix.io in site footer _(Jonathan Carbiere, 2026-10-08)_
 - a0aac1f chore: add v2.0.0 packages for macOS, Windows and Linux _(Jonathan Carbiere, 2026-10-08)_

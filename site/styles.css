@@ -15,8 +15,8 @@
   --mint-soft: rgb(11 138 119 / 0.12);
   --focus: #1d6fe0;
 
-  --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --display: "Familjen Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   --text-hero: clamp(2.6rem, 1.2rem + 5.4vw, 5.6rem);
   --text-h2: clamp(1.9rem, 1.2rem + 2.4vw, 3.2rem);
@@ -94,7 +94,7 @@ kbd, code {
 h1 {
   font-size: var(--text-hero);
   line-height: 0.95;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
   font-weight: 800;
   margin: 0;
 }
@@ -181,7 +181,7 @@ h1 .fiat { font-style: normal; color: var(--mint); }
 
 /* ---------- features ---------- */
 .features, .download, .faq { max-width: 1240px; margin: 0 auto var(--space-section); padding: 0 var(--gutter); }
-h2 { font-size: var(--text-h2); line-height: 1; letter-spacing: -0.04em; font-weight: 800; margin: 0 0 clamp(28px, 4vw, 48px); max-width: 16em; }
+h2 { font-size: var(--text-h2); line-height: 1; letter-spacing: -0.025em; font-weight: 800; margin: 0 0 clamp(28px, 4vw, 48px); max-width: 16em; }
 .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
 .card {
   grid-column: span 2;
